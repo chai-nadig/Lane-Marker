@@ -17,6 +17,8 @@ The goals / steps of this project are the following:
 
 [image1]: ./examples/grayscale.jpg "Grayscale"
 
+[solidWhiteRight]: ./test_images_output/solidWhiteRight.jpg "solidWhiteRight.jpg"
+
 ---
 
 ### Reflection
@@ -40,10 +42,8 @@ The rationale behind the ordering of steps is as follows -
 - If the ROI mask was applied before Canny Edge detection, it is possible that certain important gradient changes are the border of the region of interest are not detected correctly.
 - Hough lines are drawn on the edges that remain after applying the ROI mask.
 - The result is as such -
-![solidWhiteRight.jpg][test_images_output/solidWhiteRight.jpg]
 
-![alt text][image1]
-
+![alt text][solidWhiteRight]
 
 ### 2. Identify potential shortcomings with your current pipeline
 
