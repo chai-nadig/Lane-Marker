@@ -21,6 +21,8 @@ The goals / steps of this project are the following:
 
 [shortcoming2]: ./shortcomings/shortcoming2.png "shortcoming2"
 
+[shortcoming3]: ./shortcomings/shortcoming3.png "shortcoming3"
+
 ---
 
 ## Reflection
@@ -117,7 +119,7 @@ In the third iteration, instead of taking averages of the Hough lines as is, the
 
 Here are two shortcomings of the algorithm -
 
-1. The slope calculated for the lanes doesn't account for the thickness of the lanes. This results in lines which don't correctly align with the lanes. It results in lines that fit the lanes like these -
+1. The slope calculated for the lanes doesn't account for the thickness of the lanes. This results in lines which don't correctly align with the lanes. It results in lines like these -
 
 ![alt text][shortcoming1]
 
@@ -127,11 +129,14 @@ In the image above, although the red line on the right is drawn over the solid w
 
 In the image above, this shortcoming is more clearly seen in the red line on the left. The miscalculation of the slope causes the red line to be extrapolated much futher away than expected.
 
+2. When separting the Hough lines into two sets containing positive and negative sloped lines, I don't account for the position of the lines in the image. As a consequence, some noisy lines on either side ends up changing the average slope and position of the opposite line. It results in lines like this - 
 
+![alt text][shortcoming3]
 
+In the image above, the top end point of the red line on the right is beyond the expected end point of the red line on the left. This is probably because the average slope of the right lines were affected by a few noisy lines detected from the left lane.
 
-### 3. Suggest possible improvements to your pipeline
+### 3. Improvements
 
-A possible improvement would be to ...
+1. When dealing with videos, a global average slope and position for both the lines can be maintained. This average can be updated each time a new frame is processed. This algorithm is short sighted currently in that it calculates the average slope and position on in the current frame. Maintaining a global average would filter out noise further. It frames similar to the second shortcoming image, a global average would help get a better average for the left line.
 
-Another potential improvement could be to ...
+2. This algorithm performed poorly on the **challenge.mpg4** video. An improvement to handle frames with changing color patterns on the road due to shadows or asphalt would be to account for the color of the lines that we're tracking. A color mask to ignore all colors outside the expect thresholds would leave an image with mostly just the lanes. Applying this algorithm on such an image would render better lines.
