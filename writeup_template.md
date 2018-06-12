@@ -59,11 +59,11 @@ The average slope for each set was calculated by averaging the slopes of all the
 
 The average position for each set was calculated by averaging the *x* and *y* coordinates of both the points in each of the lines in the set.
 
-*average_x = ((x11 + x12) + (x21 + x22) + . . . + (xn1 + xn2)) / (n\*2)*
+> *average_x = ((x11 + x12) + (x21 + x22) + . . . + (xn1 + xn2)) / (n\*2)*
 
-*average_y = ((y11 + y12) + (y21 + y22) + . . . + (yn1 + yn2)) / (n\*2)*
+> *average_y = ((y11 + y12) + (y21 + y22) + . . . + (yn1 + yn2)) / (n\*2)*
 
-*average_position = (average_x, average_y)
+> *average_position = (average_x, average_y)
 
 With the average slope and average position, the equation of the line representing the lanes was found using the formula *y = mx + c* .
 
@@ -108,6 +108,9 @@ left_max_key = max(left_lines_by_slopes, key=lambda s: len(left_lines_by_slopes[
 left_average_slope, left_average_position = get_average_slope_and_position(left_lines_by_slopes[left_max_key], shape=imshape)
 ```
 
+### III
+
+In the third iteration, instead of taking averages of the Hough lines as is, the Hough lines were extrapolated to their endpoints at the top of the region of interest and at the bottom of the frame; the position of these extrapolated lines were averaged to get the average position of the endpoints. The slope of the line connecting the averaged endpoints was used as the average slope of the lane. And the center of this line was used as the average position of the lines.
 
 
 ### 2. Shortcomings
