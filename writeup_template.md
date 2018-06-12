@@ -17,9 +17,9 @@ The goals / steps of this project are the following:
 
 [solidWhiteRight]: ./test_images_output/solidWhiteRight.jpg "solidWhiteRight.jpg"
 
-[intersecting]: ./shortcomings/intersecting.png "intersecting"
+[shortcoming1]: ./shortcomings/shortcoming1.png "shortcoming1"
 
-[underfit]: ./shortcomings/underfit.png "underfit"
+[shortcoming2]: ./shortcomings/shortcoming2.png "shortcoming2"
 
 ---
 
@@ -115,10 +115,19 @@ In the third iteration, instead of taking averages of the Hough lines as is, the
 
 ### 2. Shortcomings
 
+Here are two shortcomings of the algorithm -
 
-One potential shortcoming would be what would happen when ... 
+1. The slope calculated for the lanes doesn't account for the thickness of the lanes. This results in lines which don't correctly align with the lanes. It results in lines that fit the lanes like these -
 
-Another shortcoming could be ...
+![alt text][shortcoming1]
+
+In the image above, although the red line on the right is drawn over the solid white line, its slope isn't the same as the white line. The same shortcoming is seen in the red line on the left. This miscalculation in slope causes the two red lines to intersect at the top.
+
+![alt text][shortcoming2]
+
+In the image above, this shortcoming is more clearly seen in the red line on the left. The miscalculation of the slope causes the red line to be extrapolated much futher away than expected.
+
+
 
 
 ### 3. Suggest possible improvements to your pipeline
