@@ -17,20 +17,33 @@ The goals / steps of this project are the following:
 
 [image1]: ./examples/grayscale.jpg "Grayscale"
 
+[solidWhiteRight]: ./test_images_output/solidWhiteRight.jpg "solidWhiteRight.jpg"
+
 ---
 
 ### Reflection
 
-### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
+### Pipeline
+Here are the steps in the pipeline:
+1. Convert to Grayscale
+2. Apply Gaussian Blur
+3. Perform Canny Edge Detection
+4. Apply Region of Interest Mask
+5. Draw Lines using Hough Transform
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+The rationale behind the ordering of steps is as follows -
+- I need to run Canny Edge detection to get edges in the image.
+- The color inside these edges do not matter, hence a grayscale version of the image was used.
+- To avoid detecting too many edges, a Gaussian blur was applied on the image. 
+- Lane lines are significantly thick in the image so even with a Gaussian blur, their edges will not be lost.
+- However, the blurring reduces the number of noisy edges that we detect using Canny Edge Detection.
+- Unwanted edges can further still be discarded by applying a region of interest mask.
+- The ROI mask was applied after Canny Edge Detection to avoid data loss. 
+- If the ROI mask was applied before Canny Edge detection, it is possible that certain important gradient changes are the border of the region of interest are not detected correctly.
+- Hough lines are drawn on the edges that remain after applying the ROI mask.
+- The result is as such -
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
-
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
-
-![alt text][image1]
-
+![alt text][solidWhiteRight]
 
 ### 2. Identify potential shortcomings with your current pipeline
 
