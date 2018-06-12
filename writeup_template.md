@@ -47,9 +47,7 @@ The rationale behind the ordering of steps is as follows -
 
 ![alt text][solidWhiteRight]
 
-#### draw_lines()
-
-**draw_lines()** was developed iteratively in the following way:
+#### draw_lines() was developed iteratively in the following way:
 
 ### I
 
@@ -84,24 +82,31 @@ In the next iteration of **draw_lines()**, Hough lines with slopes in a range we
 For example:
 
 
+```python
+# right_lines - Lines with negative slopes
+# Groups of negative slope lines
+right_lines_by_slopes = group_lines_by_slope(right_lines) 
 
-__*right_lines*__ - Lines with negative sloeps
+# Get slope with maximum number of lines
+right_max_key = max(right_lines_by_slopes, key=lambda s: len(right_lines_by_slopes[s]))
 
-__*right_lines_by_slopes = group_lines_by_slope(right_lines)*__ - Groups of positive slope lines
-
-__*right_max_key = max(right_lines_by_slopes, key=lambda s: len(right_lines_by_slopes[s]))*__
-
-__*right_average_slope, right_average_position = get_average_slope_and_position(right_lines_by_slopes[right_max_key], shape=imshape)*__
+# Get average slope and position of the group with the maximum number of lines
+right_average_slope, right_average_position = get_average_slope_and_position(right_lines_by_slopes[right_max_key], shape=imshape)
+```
 
 
-__*left_lines*__  - Lines with positive slopes
 
-__*left_lines_by_slopes = group_lines_by_slope(left_lines)*__   - Groups of negative slope lines
+```python
+# left_lines - Lines with positive slopes
+# Groups of positive slope lines
+left_lines_by_slopes = group_lines_by_slope(left_lines) 
 
-__*left_max_key = max(left_lines_by_slopes, key=lambda s: len(left_lines_by_slopes[s]))*__
+# Get slope with maximum number of lines
+left_max_key = max(left_lines_by_slopes, key=lambda s: len(left_lines_by_slopes[s]))
 
-__*left_average_slope, left_average_position = get_average_slope_and_position(left_lines_by_slopes[left_max_key], shape=imshape)*__
-
+# Get average slope and position of the group with the maximum number of lines
+left_average_slope, left_average_position = get_average_slope_and_position(left_lines_by_slopes[left_max_key], shape=imshape)
+```
 
 
 
